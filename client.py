@@ -1,6 +1,7 @@
 import requests
 import time
 import datetime
+import os
 
 w, h = 65, 1442;  # initialization massiv
 timeTempMas = [[0 for x in range(w)] for y in range(h)]
