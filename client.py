@@ -78,15 +78,22 @@ def cicleTemp():
         myString = f.read()
         f.close()
         myMass = myString.split()
-        if len(myMass) <= 60:
+        for number in range(10):
+            myMass.append(0)
+            
+        if len(myMass) - 10 <= 60:
             #myMassRizult = myMass
             stringTemp = 'chek'
         else:
             ollElemets = len(myMass)/60
             if ollElemets < fromServer:
-                fromServer = ollElemets
-            myMassRizult = myMass[(fromServer*60 + 1):60]
-            stringTemp =  ' '.join(myMassRizult)     
+                fromServer = ollElemets               
+                
+            for number in range(60):
+                myMassRizult = myMass[]
+                
+            #myMassRizult = myMass[(fromServer*60 + 1):60]
+            #stringTemp =  ' '.join(myMassRizult)     
         #print(stringTemp);
 #########################################    
     try:
