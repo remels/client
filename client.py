@@ -71,7 +71,7 @@ def cicleTemp():
     d.close()           
 
 ######################################
-    if onLine == 1:                   
+    if onLine == 0:                   
         stringTemp = 'chek'
     else:
         f = open(dateNow, 'r')
@@ -94,7 +94,7 @@ def cicleTemp():
                     break
                 myMassRizult = myMass[fromServer*60 + number]
                 stringTemp =  ''.join(myMassRizult)
-                print(stringTemp)
+                #print(stringTemp)
             #myMassRizult = myMass[(fromServer*60 + 1):60]
             #stringTemp =  ' '.join(myMassRizult)     
     #print(stringTemp);
