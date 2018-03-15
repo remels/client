@@ -85,7 +85,7 @@ def cicleTemp():
             ollElemets = len(myMass)/60
             if ollElemets < fromServer:
                 fromServer = ollElemets
-            myMassRizult = myMass[fromServer*60:60]
+            myMassRizult = myMass[(fromServer*60 + 1):60]
             stringTemp =  ' '.join(myMassRizult)     
         #print(stringTemp);
 #########################################    
