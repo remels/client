@@ -90,7 +90,10 @@ def cicleTemp():
                 fromServer = ollElemets               
                 
             for number in range(60):
-                myMassRizult = myMass[]
+                if myMass[fromServer*60 + number] == 0:
+                    break
+                myMassRizult = myMass[fromServer*60 + number]
+                stringTemp =  ' '.join(myMassRizult)
                 
             #myMassRizult = myMass[(fromServer*60 + 1):60]
             #stringTemp =  ' '.join(myMassRizult)     
