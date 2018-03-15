@@ -85,9 +85,9 @@ def cicleTemp():
             ollElemets = len(myMass)/60
             if ollElemets < fromServer:
                 fromServer = ollElemets
-            myMassRizult = myMass[fromServer*60:61]
+            myMassRizult = myMass[fromServer*60:60]
             stringTemp =  ' '.join(myMassRizult)     
-        
+        #print(stringTemp);
 #########################################    
     try:
         r = requests.post("http://93.171.13.173:8080/client", stringTemp)
