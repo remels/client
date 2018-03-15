@@ -48,7 +48,8 @@ def cicleTemp():
         temperature=int(temp[2:])/1000
         temp=int(temperature)
     except:
-        pass    
+        pass
+    temp = 23
 
     if temp <= 0:                    
         temp = 200 - (temp * 5)
@@ -63,51 +64,30 @@ def cicleTemp():
             secondPixel = int(secondPixel / 2)            
     timePixel = (now_time.hour * 1800) + (now_time.minute * 30) + secondPixel + 50
     timePixelSecond = timePixel
-           
 #####################################
-    if countTimeTemp >= 60:
-        countTimeTemp = 0
-        countMinut+=1
-    if now_time.hour == 0:
-    #if now_time.minute == 7:
-        if stopTime == 0:
-            stopTime = 1
-            i = 0
-            y = 0            
-            for num in range(1442):
-                for mun in range (65):
-                    timeTempMas[i][y] = 0
-                    y+=1
-                i+=1
-                y = 0                         
-            countMinut = 0
-            countTimeTemp = 0
-    if now_time.hour == 1:
-        stopTime = 0
-######################################
-    try:
-        timeTempMas[countMinut][countTimeTemp] = timePixel
-        countTimeTemp+=1
-        timeTempMas[countMinut][countTimeTemp] = temp 
-        countTimeTemp+=1
-    except:
-        pass    
+    dateNow = (str(now_date.day) + str(now_date.month) + now_time.strftime("%y") + '.txt') 
+    d = open(dateNow, 'a')   
+    d.write(str(temp)+ " " + str(timePixelSecond) + " ")
+    d.close()           
+
 ######################################
     if onLine == 0:                   
-            stringTemp = 'chek'
+        stringTemp = 'chek'
     else:
-        if countMinut < fromServer:
-            fromServer = countMinut   
-        for item in timeTempMas[fromServer]:                
-            if item == 0:
-                break     
-            stringTemp = stringTemp + str(item) + ' '    
-######################################    
-    dateNow = (str(now_date.day) + str(now_date.month) + now_time.strftime("%y")) 
-    
-    f=open(dateNow + '.txt', 'w')
-    f.write(stringTemp)
-    f.close()
+        f = open(dateNow, 'r')
+        myString = f.read()
+        f.close()
+        myMass = myString.split()
+        if len(myMass) <= 60:
+            #myMassRizult = myMass
+            stringTemp = 'chek'
+        else:
+            ollElemets = len(myMass)/60
+            if ollElemets < fromServer:
+                fromServer = ollElemets
+            myMassRizult = myMass[fromServer*60:61]
+            stringTemp =  ' '.join(myMassRizult)     
+        
 #########################################    
     try:
         r = requests.post("http://93.171.13.173:8080/client", stringTemp)
