@@ -71,7 +71,7 @@ def cicleTemp():
     d.close()           
 
 ######################################
-    if onLine == 0:                   
+    if onLine == 1:                   
         stringTemp = 'chek'
     else:
         f = open(dateNow, 'r')
@@ -80,7 +80,7 @@ def cicleTemp():
         myMass = myString.split()
         for number in range(10):
             myMass.append(0)
-            
+          
         if len(myMass) - 10 <= 60:
             #myMassRizult = myMass
             stringTemp = 'chek'
@@ -93,11 +93,12 @@ def cicleTemp():
                 if myMass[fromServer*60 + number] == 0:
                     break
                 myMassRizult = myMass[fromServer*60 + number]
-                stringTemp =  ' '.join(myMassRizult)
-                
+                stringTemp =  ''.join(myMassRizult)
+                print(stringTemp)
             #myMassRizult = myMass[(fromServer*60 + 1):60]
             #stringTemp =  ' '.join(myMassRizult)     
-        #print(stringTemp);
+    #print(stringTemp);
+    #print(fromServer);
 #########################################    
     try:
         r = requests.post("http://93.171.13.173:8080/client", stringTemp)
