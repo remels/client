@@ -16,6 +16,7 @@ firstMinuteSecond = ''
 firstPoint = 0
 stopTime = 0
 temp = 0
+temp2 = 0
 
 
 ######################################
@@ -47,12 +48,26 @@ def cicleTemp():
         temperature=int(temp[2:])/1000
         temp=int(temperature)
     except:
-        pass   
+        pass
+    try:
+        tfile2=open("/sys/bus/w1/devices/28-04178245e3ff/w1_slave")  # read temperature
+        ttext2=tfile2.read()
+        tfile2.close()
+        temp2=ttext2.split("\n")[1].split(" ")[9]    
+        temperature2=int(temp2[2:])/1000
+        temp2=int(temperature2)
+    except:
+        pass
 
     if temp <= 0:                    
         temp = 200 - (temp * 5)
     else:
         temp = temp * (-5) + 200
+
+    if temp2 <= 0:                    
+        temp2 = 200 - (temp2 * 5)
+    else:
+        temp2 = temp2 * (-5) + 200    
 #####################################
     now_time = datetime.datetime.now()    #  read time
     now_date = datetime.date.today()
