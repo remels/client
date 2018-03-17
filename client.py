@@ -1,10 +1,9 @@
 import requests
 import time
 import datetime
-import os
 
-w, h = 65, 1442;  # initialization massiv
-timeTempMas = [[0 for x in range(w)] for y in range(h)]
+#w, h = 65, 1442;  # initialization massiv
+#timeTempMas = [[0 for x in range(w)] for y in range(h)]
 countMinut = 0   
 countTimeTemp = 0
 timePixel = 30000
@@ -48,8 +47,7 @@ def cicleTemp():
         temperature=int(temp[2:])/1000
         temp=int(temperature)
     except:
-        pass
-    temp = 23
+        pass   
 
     if temp <= 0:                    
         temp = 200 - (temp * 5)
@@ -67,27 +65,28 @@ def cicleTemp():
 #####################################
     dateNow = (str(now_date.day) + str(now_date.month) + now_time.strftime("%y") + '.txt') 
     d = open(dateNow, 'a')   
-    d.write(str(temp)+ " " + str(timePixelSecond) + " ")
+    #d.write(str(temp)+ " " + str(timePixelSecond) + " ")
+    d.write(str(timePixelSecond)+ " " + str(temp) + " ")    # write to file
     d.close()           
 
 ######################################
     if onLine == 0:                   
         stringTemp = 'chek'
     else:
-        f = open(dateNow, 'r')
+        f = open(dateNow, 'r')   # read from file
         myString = f.read()
         f.close()
-        myMass = myString.split()
-        for number in range(10):
-            myMass.append(0)
+        myMass = myString.split()        
           
-        if len(myMass) - 10 <= 60:
-            #myMassRizult = myMass
-            stringTemp = 'chek'
-        else:
+        if len(myMass)<= 60:            
+            stringTemp =  ' '.join(myMass)
+        else:         
+            for number in range(10):
+                myMass.append(0)    
             ollElemets = len(myMass)/60
             if ollElemets < fromServer:
-                fromServer = ollElemets               
+                fromServer = ollElemets
+                
             i = 0
             myMassRizult = []
             for number in range(60):
@@ -96,13 +95,8 @@ def cicleTemp():
                 myMassRizult.append(myMass[fromServer*60 + i])
                 i+=1
                 
-            stringTemp =  ' '.join(myMassRizult)
-            
-    #print(stringTemp)
-            #myMassRizult = myMass[(fromServer*60 + 1):60]
-            #stringTemp =  ' '.join(myMassRizult)     
-    #print(stringTemp)
-    #print(fromServer);
+            stringTemp =  ' '.join(myMassRizult)            
+    
 #########################################    
     try:
         r = requests.post("http://93.171.13.173:8080/client", stringTemp)
