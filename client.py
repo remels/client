@@ -79,10 +79,14 @@ def cicleTemp():
     timePixelSecond = timePixel
 #####################################
     dateNow = (str(now_date.day) + str(now_date.month) + now_time.strftime("%y") + '.txt') 
-    d = open(dateNow, 'a')   
-    #d.write(str(temp)+ " " + str(timePixelSecond) + " ")
+    d = open(dateNow, 'a')    
     d.write(str(timePixelSecond)+ " " + str(temp) + " ")    # write to file
-    d.close()           
+    d.close()
+
+    dateNow2 = (str(now_date.day) + str(now_date.month) + now_time.strftime("%y") + 't2' + '.txt') 
+    d = open(dateNow2, 'a')    
+    d.write(str(timePixelSecond)+ " " + str(temp2) + " ")    # write to file
+    d.close() 
 
 ######################################
     if onLine == 0:                   
