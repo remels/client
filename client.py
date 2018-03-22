@@ -155,7 +155,7 @@ def cicleTemp():
 
     try:
         r2 = requests.post("http://93.171.13.173:8080/client2", stringTemp2)
-        fromServer2 = int(r.text)
+        fromServer2 = int(r2.text)
         onLine = 1       
     except:        
         onLine = 0
