@@ -79,6 +79,7 @@ def cicleTemp():
     timePixelSecond = timePixel
 #####################################
     dateNow = (str(now_date.day) + str(now_date.month) + now_time.strftime("%y") + '.txt') 
+
     d = open(dateNow, 'a')    
     d.write(str(timePixelSecond)+ " " + str(temp) + " ")    # write to file
     d.close()
@@ -95,7 +96,12 @@ def cicleTemp():
         f = open(dateNow, 'r')   # read from file
         myString = f.read()
         f.close()
-        myMass = myString.split()        
+        myMass = myString.split()
+
+        f2 = open(dateNow2, 'r')   # read from file
+        myString2 = f2.read()
+        f2.close()
+        myMass2 = myString2.split()
           
         if len(myMass)<= 60:            
             stringTemp =  ' '.join(myMass)
@@ -105,6 +111,15 @@ def cicleTemp():
             ollElemets = len(myMass)/60
             if ollElemets < fromServer:
                 fromServer = ollElemets
+
+        if len(myMass2)<= 60:            
+            stringTemp2 =  ' '.join(myMass2)
+        else:         
+            for number2 in range(10):
+                myMass2.append(0)    
+            ollElemets2 = len(myMass2)/60
+            if ollElemets2 < fromServer2:
+                fromServer2 = ollElemets2
                 
             i = 0
             myMassRizult = []
@@ -114,7 +129,17 @@ def cicleTemp():
                 myMassRizult.append(myMass[fromServer*60 + i])
                 i+=1
                 
-            stringTemp =  ' '.join(myMassRizult)            
+            stringTemp =  ' '.join(myMassRizult)
+
+            i2 = 0
+            myMassRizult2 = []
+            for number2 in range(60):
+                if myMass2[fromServer2*60 + number2] == 0:
+                    break
+                myMassRizult2.append(myMass2[fromServer2*60 + i2])
+                i2+=1
+                
+            stringTemp2 =  ' '.join(myMassRizult2)
     
 #########################################    
     try:
@@ -124,6 +149,14 @@ def cicleTemp():
         #r = requests.post("http://localhost:8080/client", stringTemp)
         #print(r.text)
         #print(stringTemp)
+    except:        
+        onLine = 0
+        pass
+
+    try:
+        r2 = requests.post("http://93.171.13.173:8080/client2", stringTemp2)
+        fromServer2 = int(r.text)
+        onLine = 1       
     except:        
         onLine = 0
         pass
