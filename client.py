@@ -11,6 +11,7 @@ timePixelSecond = 0
 stringTemp = ''
 cicle = 0
 fromServer = 0
+fromServer2 = 0
 onLine = 0
 firstMinuteSecond = ''
 firstPoint = 0
@@ -32,11 +33,13 @@ def cicleTemp():
     global stringTemp
     global strN
     global cicle
-    global fromServer    
+    global fromServer
+    global fromServer2
     global onLine
     global firstMinuteSecond
     global stopTime
     global temp
+    global temp2
       
     stringTemp = ''
     
@@ -156,9 +159,10 @@ def cicleTemp():
     try:
         r2 = requests.post("http://93.171.13.173:8080/client2", stringTemp2)
         fromServer2 = int(r2.text)
-        onLine = 1       
+        #print(r2.text)
+        #onLine = 1       
     except:        
-        onLine = 0
+        #onLine = 0
         pass
     
 ############################################
